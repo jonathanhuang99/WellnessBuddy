@@ -18,8 +18,8 @@ pst = timezone('US/Pacific')
 
 app = Flask(__name__)
 
-@app.route("/test")
-def hello():
+@app.route("/send")
+def storeData():
     date_time = datetime.now(pst).strftime("%Y-%m-%d %H:%M:%S")
     fahrenheit = request.args.get("fahrenheit")
     celcius = request.args.get("celcius")
@@ -108,7 +108,6 @@ def recommendValue(type, currentAvg):
             return "It is a bit cold, try turning on the heater to reach 68-72 fahrenheit."
         else:
             return "It is a bit hot, try cooling down the room to 68-72 fahrenheit."
-        #return "Average: {0} Recommended: {1} Target: {2}".format(currentAvg, recommended, target)
     elif type == 'Celcius':
         target = 20
         recommended = (currentAvg + target)/2
@@ -118,7 +117,6 @@ def recommendValue(type, currentAvg):
             return "It is a bit cold, try turning on the heater to reach 20-22 celcius."
         else:
             return "It is a bit hot, try cooling down the room to 20-22 celcius."
-        #return "Average: {0} Recommended: {1} Target: {2}".format(currentAvg, recommended, target)
     elif type == 'Humidity':
         target = 40
         recommended = (currentAvg + target)/2
@@ -128,14 +126,12 @@ def recommendValue(type, currentAvg):
             return "The air is a bit dry. Try using a humidifier!"
         else:
             return "It is too humid! Try dehumidifying!"
-        #return "Average: {0} Recommended: {1} Target: {2}".format(currentAvg, recommended, target)
     elif type == 'Sound':
         target = 1500
         #recommended = (currentAvg + target)/2
         if currentAvg <= 1500:
             return "Sound levels are safe!"
         return "Sound levels are a bit high! Try lowering your volume!"
-        #return "Average: {0} Recommended: {1} Target: {2}".format(currentAvg, target)
     elif type == 'VL':
         target = 500
         recommended = (currentAvg + target)/2
@@ -145,7 +141,6 @@ def recommendValue(type, currentAvg):
             return "Your light levels are low! If you are working, try increasing the brightness!"
         else:
             return "It is very bright! Lowering the light level may make working conditions more comfortable."
-        #return "Average: {0} Recommended: {1} Target: {2}".format(currentAvg, recommended, target)
     elif type == 'IL':
         target = 0
         recommended = (currentAvg + target)/2
@@ -161,7 +156,6 @@ def recommendValue(type, currentAvg):
             return "UV levels have high risk! Try reducing the amount of sun exposure!"
         elif currentAvg >= 8:
             return "You are at very high risk of sun damage!"
-        #return "Average: {0} Recommended: {1} Target: {2}".format(currentAvg, recommended, target)
     elif type == 'Steps':
         target = 10000
         recommended = (currentAvg + target)/2

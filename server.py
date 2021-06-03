@@ -1,6 +1,5 @@
 from flask import Flask
 from flask import request
-import pickle
 from datetime import datetime
 from pytz import timezone
 import mysql.connector
